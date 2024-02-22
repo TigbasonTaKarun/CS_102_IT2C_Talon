@@ -1,0 +1,151 @@
+---
+title: "CS102_2nd_Act"
+output: html_document
+date: "2024-02-22"
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r}
+
+#Source link =
+
+```
+
+```{r}
+
+#Scraping 50 products
+
+
+library(dplyr)
+library(rvest)
+library(polite)
+library(httr)
+library(selectr)
+
+
+
+scrapeAmaRev <- function(product_name, url_stub, pages) {
+  prod_df <- data.frame()
+
+  for (page in pages) {
+    link <- paste0("https://www.amazon.com.au/",url_stub,"/ref=cm_cr_arp_d_paging_btm_next_", page, "?ie=UTF8&reviewerType=all_reviews&pageNumber=", page)
+    
+    
+    session <- bow(link, user_agent = "Educational Purpose")
+
+    ScrapeNodes <- function(selector) {
+      scrape(session) %>%
+        html_nodes(selector) %>%
+        html_text(trim = TRUE)
+    }
+
+    Scrp_Title <- ScrapeNodes("span.a-size-base.review-title.a-color-base.review-title-content.a-text-bold")[1:10]
+    Scrp_Reviewer <- ScrapeNodes("span.a-profile-name")[1:10]
+    Scrp_Review <- ScrapeNodes("span.a-size-base.review-text.review-text-content")[1:10]
+    Scrp_Date <- ScrapeNodes("span.a-size-base.a-color-secondary.review-date")[1:10]
+    Scrp_Rating <- ScrapeNodes("span.a-icon-alt")[1:10]
+    Scrp_Type <- ScrapeNodes("span.a-size-mini.a-color-state.a-text-bold")[1:10]
+
+    prod_df <- rbind(prod_df, data.frame(
+      prod_name = product_name,
+      title = Scrp_Title,
+      reviewer = Scrp_Reviewer,
+      review = Scrp_Review,
+      date = Scrp_Date,
+      ratings = Scrp_Rating,
+      type_of_purchase = Scrp_Type
+    ))
+
+    Sys.sleep(5)
+  }
+
+  return(prod_df)
+}
+```
+
+1-10 Product
+
+```{r}
+    
+prod1 <- scrapeAmaRev(
+  "Bandai Hobby Kit Hg 1/144 Xi Gundam",
+  "Bandai-Hobby-Hathaways-Spirits-HobbyHGUC/product-reviews/B08RB6CDXG",
+  3:7
+)
+
+
+
+prod2 <- scrapeAmaRev(  
+  "Bandai RG 1/144 Gundam Epyon Figure Model Kit",
+  "Bandai-Gundam-Epyon-Figure-Model/product-reviews/B0BYYJHHWN",
+  6:10
+)
+
+
+prod3 <- scrapeAmaRev(
+  "Bandai PG 1/60 WGUNDAM Zero Custom",
+  "Bandai-PG-WGUNDAM-Zero-Custom/product-reviews/B09XSY818N",
+  3:7
+)
+
+
+prod4 <- scrapeAmaRev(
+  "Bandai Hobby Kit Mg 1/100 Astray Red Frame Revise",
+  "Bandai-Hobby-Astray-Frame-Revise/product-reviews/B08XWHSC2Q",
+  3:7
+)
+
+
+prod5 <- scrapeAmaRev(
+  "Bandai Hobby Kit - Gundam - Master Grade Sd Freedom",
+  "Bandai-Hobby-Kit-Gundam-Freedom/product-reviews/B0BGNC9F44",
+  3:7
+)
+
+
+prod6 <- scrapeAmaRev(
+  "Bandai Hobby 1/100 Scale MG Wing Gundam Zero Ew Ver.Ka Action Figure",
+  "Bandai-Gundam-Ver-Ka-Action-Figure/product-reviews/B089DC39FY",
+  3:7
+)
+
+
+prod7 <- scrapeAmaRev(
+  "Bandai Hobby 1/60 Scale PG Strike Freedom Gundam Action Figure",
+  "Mobile-Gundam-Destiny-Freedom-Plastic/product-reviews/B09KN3Z226",
+  3:7
+)
+
+
+prod8 <- scrapeAmaRev(
+  "Bandai Hobby HG 1/144 Gundam Schwarzette Model Kit",
+  "Bandai-Hobby-Gundam-Schwarzette-Model/product-reviews/B0BQHHNV9V",
+  3:7
+)
+
+prod9 <- scrapeAmaRev(
+  "Bandai Hobby Kit Rg 1/144 Rx-78-2 Gundam",
+  "RG-RX-78-2-Gundam-Scale-Model/product-reviews/B08VXCYTYG",
+  3:7
+)
+
+prod10 <- scrapeAmaRev(
+  "Bandai Hobby Gundam The Witch from Mercury Gundam Calibarn Model Kit",
+  "Bandai-Hobby-Gundam-Mercury-Calibarn/product-reviews/B0BYYMKV2B",
+  6:10
+)
+
+view(prod1)
+view(prod2)
+view(prod3)
+view(prod4)
+view(prod5)
+view(prod6)
+view(prod7)
+view(prod8)
+view(prod9)
+view(prod10)
+```
