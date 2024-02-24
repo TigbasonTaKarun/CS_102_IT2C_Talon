@@ -10,7 +10,7 @@ knitr::opts_chunk$set(echo = TRUE)
 
 ```{r}
 
-#Source link =
+#Source link = Ady
 
 ```
 
@@ -30,13 +30,22 @@ library(selectr)
 scrapeAmaRev <- function(product_name, url_stub, pages) {
   prod_df <- data.frame()
 
+  
+  
+  
+  
   for (page in pages) {
-    link <- paste0("https://www.amazon.com.au/",url_stub,"/ref=cm_cr_arp_d_paging_btm_next_", page, "?ie=UTF8&reviewerType=all_reviews&pageNumber=", page)
+  link <- paste0("https://www.amazon.com.au/",url_stub,"/ref=cm_cr_arp_d_paging_btm_next_", page,    "?ie=UTF8&reviewerType=all_reviews&pageNumber=", page)
     
     
-    session <- bow(link, user_agent = "Educational Purpose")
+    
+  
+  session <- bow(link, user_agent = "For Educational Purpose")
 
-    ScrapeNodes <- function(selector) {
+    
+  
+  
+  ScrapeNodes <- function(selector) {
       scrape(session) %>%
         html_nodes(selector) %>%
         html_text(trim = TRUE)
@@ -66,86 +75,636 @@ scrapeAmaRev <- function(product_name, url_stub, pages) {
 }
 ```
 
-1-10 Product
+1st 10 Batch BANDAI Products
 
 ```{r}
     
 prod1 <- scrapeAmaRev(
+  
   "Bandai Hobby Kit Hg 1/144 Xi Gundam",
+  
   "Bandai-Hobby-Hathaways-Spirits-HobbyHGUC/product-reviews/B08RB6CDXG",
+  
   3:7
+  
 )
 
 
 
 prod2 <- scrapeAmaRev(  
-  "Bandai RG 1/144 Gundam Epyon Figure Model Kit",
-  "Bandai-Gundam-Epyon-Figure-Model/product-reviews/B0BYYJHHWN",
+  
+  "Bandai Hobby - Gundam Wing: Endless Waltz - Gundam Heavyarms (EW),Bandai MG",
+  
+  "Bandai-Gundam-Heavyarms-Master-Grade/product-reviews/B006F9CFWQ",
+  
   6:10
+  
 )
 
 
 prod3 <- scrapeAmaRev(
-  "Bandai PG 1/60 WGUNDAM Zero Custom",
-  "Bandai-PG-WGUNDAM-Zero-Custom/product-reviews/B09XSY818N",
+  
+  "Bandai Hobby MG Gundam 1/100 Kyrios",
+  
+  "Gundam-00-Kyrios-Bandai-Spirits/product-reviews/B084DFTCFR",
+  
   3:7
+  
 )
 
 
 prod4 <- scrapeAmaRev(
-  "Bandai Hobby Kit Mg 1/100 Astray Red Frame Revise",
-  "Bandai-Hobby-Astray-Frame-Revise/product-reviews/B08XWHSC2Q",
+  
+  "Bandai Hobby Kit Gundam The Witch From Mercury Full Mechanics 1/100 Gundam Aerial",
+  
+  "Bandai-Gundam-Mercury-Mechanics-Aerial/product-reviews/B0BGNCF723",
+  
   3:7
+  
+  
 )
 
 
 prod5 <- scrapeAmaRev(
-  "Bandai Hobby Kit - Gundam - Master Grade Sd Freedom",
-  "Bandai-Hobby-Kit-Gundam-Freedom/product-reviews/B0BGNC9F44",
+  
+  "Bandai Hobby Kit Entry Grade 1/144 Rx-78-2 Gundam (3L)",
+  
+  "Bandai-Hobby-Mobile-RX-78-2-Spirits/product-reviews/B089RY41V6",
+  
   3:7
+  
 )
 
 
 prod6 <- scrapeAmaRev(
+  
   "Bandai Hobby 1/100 Scale MG Wing Gundam Zero Ew Ver.Ka Action Figure",
+  
   "Bandai-Gundam-Ver-Ka-Action-Figure/product-reviews/B089DC39FY",
+  
   3:7
+  
 )
 
 
 prod7 <- scrapeAmaRev(
-  "Bandai Hobby 1/60 Scale PG Strike Freedom Gundam Action Figure",
-  "Mobile-Gundam-Destiny-Freedom-Plastic/product-reviews/B09KN3Z226",
+  
+  "Bandai 1/144 RG XXXG-00W0 Wing Gundam Zero EW Model Kit",
+  
+  "Bandai-XXXG-00W0-Wing-Gundam-Model/product-reviews/B00O3RU8G2",
+  
   3:7
+  
 )
 
 
 prod8 <- scrapeAmaRev(
-  "Bandai Hobby HG 1/144 Gundam Schwarzette Model Kit",
-  "Bandai-Hobby-Gundam-Schwarzette-Model/product-reviews/B0BQHHNV9V",
+  
+  "Bandai Hobby Kit Gundam Hg 1/144 Demi Barding",
+  
+  "Bandai-Hobby-Gundam-Demi-Barding/product-reviews/B0BQHL4MC1",
+  
   3:7
+  
 )
 
 prod9 <- scrapeAmaRev(
-  "Bandai Hobby Kit Rg 1/144 Rx-78-2 Gundam",
-  "RG-RX-78-2-Gundam-Scale-Model/product-reviews/B08VXCYTYG",
+  
+  "BANDAI HOBBY HGBD:R Gundam 1/144 EARTHREE Gundam",
+  
+  "Gundam-Build-Divers-RE-Earthree/product-reviews/B07W1W5468",
+  
   3:7
+  
 )
 
 prod10 <- scrapeAmaRev(
+  
   "Bandai Hobby Gundam The Witch from Mercury Gundam Calibarn Model Kit",
+  
   "Bandai-Hobby-Gundam-Mercury-Calibarn/product-reviews/B0BYYMKV2B",
+  
   6:10
+  
 )
 
-view(prod1)
-view(prod2)
-view(prod3)
-view(prod4)
-view(prod5)
-view(prod6)
-view(prod7)
-view(prod8)
-view(prod9)
-view(prod10)
+```
+
+2nd 10 batch Lego Products
+
+```{r}
+prod11 <- scrapeAmaRev(
+  
+  "LEGO® Creator Space Astronaut 31152 Kids' Viper Jet Model Set, Space-Themed Toy for Boys and Girls Aged 9 Years Old and Over",
+  
+  "LEGO®-Creator-Astronaut-31152-Space-Themed/product-reviews/B0CFW2SH2H",
+  
+  3:7
+  
+)
+
+
+
+prod12 <- scrapeAmaRev(  
+  
+  "LEGO® Star Wars™ Venator-Class Republic Attack Cruiser™ 75367 Ultimate Collector Series Building Set for Adults,Birthday Toy or Special Treat for Fans",
+  
+  "Venator-Class-Republic-CruiserTM-75367-Collector/product-reviews/B0CJ7W6QTW",
+  
+  6:10
+  
+)
+
+
+prod13 <- scrapeAmaRev(
+  
+  "LEGO® Icons Dune Atreides Royal Ornithopter 10327 Collectible Building Set for Adults,for Lovers of Sci-Fi Films",
+  
+  "Ornithopter-10327-Collectible-Minifigures-Including/product-reviews/B01N1O0F2K",
+  
+  3:7
+  
+  
+)
+
+
+prod14 <- scrapeAmaRev(
+  
+  "LEGO® Architecture Landmarks Collection: Himeji Castle 21060 Building Set; Collectible Model Kit for Adults",
+  
+  "LEGO®-Architecture-Landmarks-Collection-Collectible/product-reviews/B0BV7CP5CB",
+  
+  3:7
+  
+)
+
+
+prod15 <- scrapeAmaRev(
+  
+  "LEGO Icons Vespa 125 10298 Scooter, Vintage Italian Iconic Model Building Kit, Display Collection Décor Set for Adults",
+  
+  "LEGO-Building-Collection-Relaxing-10298/product-reviews/B09BNX43N7",
+  
+  3:7
+  
+)
+
+
+prod16 <- scrapeAmaRev(
+  
+  "LEGO® Nintendo Entertainment System™ 71374 Building Kit;Creative Set for Adults",
+  
+  "LEGO-71374-Blocks/product-reviews/B08DMFCRF8",
+  
+  3:7
+  
+  
+)
+
+
+prod17 <- scrapeAmaRev(
+  
+  "LEGO® Technic 2022 Ford GT 42154 Building Kit for Adults",
+  
+  "Technic-42154-Building-Immersive-Supercar/product-reviews/B0BBRZXX8B",
+  
+  3:7
+  
+)
+
+
+
+prod18 <- scrapeAmaRev(
+  
+  "LEGO® Minecraft® The Mushroom House 21179 Building Kit and Toy House Playset",
+  
+  "LEGO-Minecraft-Mushroom-Building-21179/product-reviews/B09BNVFBPW",
+  
+  3:7
+  
+)
+
+prod19 <- scrapeAmaRev(
+  
+  "LEGO® Star Wars: Ahsoka Ghost & Phantom II 75357 Building Toy Set",
+  
+  "LEGO®-Star-Wars-Phantom-Building/product-reviews/B0BV7FZH9C",
+  
+  3:7
+  
+)
+
+prod20 <- scrapeAmaRev(
+  
+  "LEGO® Star Wars™ 332nd Ahsoka’s Clone Trooper™ Battle Pack 75359 Building Toy Set, Featuring Clone Captain Vaughn and a Stud-Shooting Speeder",
+  
+  "TrooperTM-75359-Building-Featuring-Stud-Shooting/product-reviews/B0BV7CGFPC",
+  
+  6:10
+  
+)
+
+```
+
+3rd 10 batch Under Armour shoes
+
+```{r}
+
+prod21 <- scrapeAmaRev(
+  
+  "Under Armour Men's UA Surge 3",
+  
+  "Under-Armour-Surge-Running-Shoes/product-reviews/B0B9YBSFNN",
+  
+  3:7
+  
+)
+
+
+
+prod22 <- scrapeAmaRev(  
+  
+  "Under Armour Men's Ua Charged Assert 10 Sneaker",
+  
+  "Under-Armour-Charged-Assert-Sneaker/product-reviews/B0BPHWGPLW",
+
+  6:10
+
+)
+
+
+prod23 <- scrapeAmaRev(
+  
+  "Under Armour Men's Ua Charged Pursuit 3 Running Shoes",
+  
+  "Under-Armour-Charged-Pursuit-Running/product-reviews/B09W69TY24",
+
+  3:7
+
+)
+
+
+prod24 <- scrapeAmaRev(
+  
+  "Under Armour",
+  
+  "Under-Armour-Charged-Assert-Running/product-reviews/B09B5NZK7S",
+  
+  3:7
+  
+)
+
+
+prod25 <- scrapeAmaRev(
+  
+  "Under Armour Mens 3022641 Charged Assert 8 4e Black Size:",
+  
+  "Under-Armour-3022641-Charged-Assert/product-reviews/B07G7JPSBG",
+  
+  3:7
+  
+)
+
+
+prod26 <- scrapeAmaRev(
+  
+  "Under Armour",
+  
+  "Under-Armour/product-reviews/B0CPF9LVSS",
+  
+  3:7
+  
+)
+
+
+prod27 <- scrapeAmaRev(
+  
+  "Under Armour Men's Charged Commit TR 3 Cross Trainer",
+  
+  "Under-Armour-Charged-Commit-Trainer/product-reviews/B08FV3539P",
+  
+  3:7
+  
+)
+
+
+prod28 <- scrapeAmaRev(
+  
+  "Under Armour Men's Micro G Pursuit Bp Running Shoe",
+  
+  "Under-Armour-3021953-Micro-Pursuit/product-reviews/B07HKK2PLH",
+  
+  3:7
+  
+)
+
+prod29 <- scrapeAmaRev(
+  
+  "Under Armour Men's Surge 3 Running Shoes",
+  
+  "Under-Armour-Surge-Running-Shoes/product-reviews/B09P4B26N7",
+  
+  3:7
+  
+)
+
+prod30 <- scrapeAmaRev(
+  
+  "Under Armour Men's Micro Pursuit Road Running Shoe",
+  
+  "Under-Armour-Micro-Pursuit-Running/product-reviews/B07JHC2BV9",
+  
+  6:10
+  
+)
+
+```
+
+4th batch CAT Products
+
+```{r}
+    
+prod31 <- scrapeAmaRev(
+  
+  "Caterpillar",
+  
+  "Caterpillar-Mens-Colorado-Boots-Beige/product-reviews/B07P159DH4",
+  
+  3:7
+  
+)
+
+
+
+prod32 <- scrapeAmaRev(  
+  
+  "Caterpillar MeshFlex Automotive Seat Covers for Cars Trucks and SUVs",
+  
+  "Caterpillar-MeshFlex-Automotive-Covers-Trucks/product-reviews/B08RHD84XY",
+  
+  6:10
+  
+)
+
+
+prod33 <- scrapeAmaRev(
+  
+  "Caterpillar Men's Cargo Pant with Holster",
+  
+  "Caterpillar-Mens-Cargo-Pant-Holster/product-reviews/B07B136YHW",
+  
+  3:7
+  
+)
+
+
+prod34 <- scrapeAmaRev(
+  
+  "Caterpillar H2O Defender Pant",
+  
+  "Caterpillar-1810008-H2O-Defender-Pant/product-reviews/B0BQVXNNLS",
+  
+  3:7
+  
+)
+
+
+prod35 <- scrapeAmaRev(
+  
+  "Caterpillar Men's Trademark Banner Long-Sleeve T-Shirt",
+  
+  "Caterpillar-Trademark-Banner-Long-Sleeve-T-Shirt/product-reviews/B08DNMMJCD",
+  
+  3:7
+  
+)
+
+
+prod36 <- scrapeAmaRev(
+  
+  "Caterpillar Men's Colorado Boots",
+  
+  "Caterpillar-Mens-Colorado-Boots-Black/product-reviews/B09XJHK5JJ",
+  
+  3:7
+  
+)
+
+
+prod37 <- scrapeAmaRev(
+  
+  "Caterpillar Flexfit Automotive Seat Covers for Cars Trucks and SUVs (Set of 2)",
+  
+  "Caterpillar-Flexfit-Automotive-Covers-Trucks/product-reviews/B09RNF5ZDW",
+  
+  3:7
+  
+)
+
+
+prod38 <- scrapeAmaRev(
+  
+  "Caterpillar Men's",
+  
+  "Caterpillar-Mens-Tall-Trademark-Banner/product-reviews/B07B14DZKD",
+  
+  3:7
+  
+)
+
+
+prod39 <- scrapeAmaRev(
+  
+  "Caterpillar Men's Diagnostic Steel-Toe Waterproof Boot,Dark",
+  
+  "Caterpillar-Mens-Diagnostic-Steel-Toe-Waterproof/product-reviews/B0023RSLCM",
+  
+  3:7
+  
+)
+
+prod40 <- scrapeAmaRev(
+  
+  "Caterpillar Men's Raised Logo Cap",
+  
+  "Caterpillar-Mens-Raised-Logo-Night/product-reviews/B086H59WDM",
+  
+  6:10
+  
+)
+
+
+```
+
+5th 10 batch Pencils
+
+```{r}
+    
+prod41 <- scrapeAmaRev(
+  
+  "uni Kuru Toga Roulette Model Auto Lead Rotation 0.5mm Mechanical Pencil, Silver Body",
+  
+  "Mechanical-Pencil-Kurutoga-Roulette-Silver/product-reviews/B004OHNR0A",
+  
+  3:7
+  
+)
+
+
+
+prod42 <- scrapeAmaRev(  
+  
+  "Nicpro 6PCS Mechanical Pencils, 3 PCS Metal Automatic Drafting Pencil 0.5 mm & 0.7 mm & 0.9 mm and 3 PCS 2mm Graphite Lead Holder",
+  
+  "Nicpro-Mechanical-Automatic-Drafting-Sketching/product-reviews/B07XMPTDMJ",
+  
+  6:10
+  
+)
+
+
+prod43 <- scrapeAmaRev(
+  
+  "Faber-Castell Castell 9000 Graphite Pencil Art Set, 12 Pack",
+  
+  "Faber-Castell-9000-Black-Pencils/product-reviews/B000I5MNC0",
+  
+  3:7
+  
+)
+
+
+prod44 <- scrapeAmaRev(
+  
+  "Staedtler Noris Colour Coloured Pencils",
+  
+  "Staedtler-Coloured-Pencils-185-C12/product-reviews/B00TFY8266",
+  
+  3:7
+  
+)
+
+
+prod45 <- scrapeAmaRev(
+  
+  "Derwent Academy Colouring Pencils, Set of 24 in Tin Box",
+  
+  "Derwent-Colouring-Blendable-Multicolour-Illustration/product-reviews/B001XCWP02",
+  
+  3:7
+)
+
+
+prod46 <- scrapeAmaRev(
+  
+  "Faber-Castell TK Mechanical Pencil 2mm",
+  
+  "Faber-Castell-Mechanical-Pencil-1-4mm-Metallic/product-reviews/B000WH2VOY",
+  
+  3:7
+  
+)
+
+
+prod47 <- scrapeAmaRev(
+  
+  "BIC Kids Evolution ECOlutions Coloured Pencils",
+  
+  "950526-Kids-Evolution-Colouring-Pencil/product-reviews/B0781VNK1Y",
+  
+  3:7
+  
+)
+
+
+prod48 <- scrapeAmaRev(
+  
+  "STAEDTLER 780 C BKP6 Mars Technico Mechanical Pencil with HB Lead and Eraser,Black",
+  
+  "Staedtler-780-Technico-Hardness-Promotion/product-reviews/B071XWVGV9",
+  
+  3:7
+  
+)
+
+prod49 <- scrapeAmaRev(
+  
+  "uni Kuru Toga Advance - Auto Lead Rotating Mechanical Pencil, 0.5mm (Black)",
+  
+  "Mechanical-Pencil-Advance-0-5mm-M55591P-24/product-reviews/B06XV61B3T",
+  
+  3:7
+  
+)
+
+prod50 <- scrapeAmaRev(
+  
+  "STAEDTLER 100 G12 Mars Lumograph Graphite Pencils For Drawing & Sketching",
+  
+  "STAEDTLER-100-G12-Lumograph-Sketching/product-reviews/B0014E2S0Q",
+  
+  6:10
+  
+)
+
+```
+
+```{r}
+
+amaprods = data.frame();
+
+amaprods <- rbind(amaprods, 
+                  prod1,
+                  prod2,
+                  prod3,
+                  prod4,
+                  prod5,
+                  prod6,
+                  prod7,
+                  prod8,
+                  prod9,
+                  prod10,
+                prod11,
+                prod12,
+                prod13,
+                prod14,
+                prod15,
+                prod16,
+                prod17,
+                prod18,
+                prod19,
+                prod20,
+                prod21,
+                prod22, 
+                prod23, 
+                prod24, 
+                prod25, 
+                prod26, 
+                prod27, 
+                prod28, 
+                prod29, 
+                prod30,
+                prod31, 
+                prod32,
+                prod33, 
+                prod34, 
+                prod35, 
+                prod36, 
+                prod37, 
+                prod38, 
+                prod39, 
+                prod40,
+                prod41,
+                prod42, 
+                prod43,
+                prod44, 
+                prod45, 
+                prod46, 
+                prod47,
+                prod48,
+                prod49,
+                prod50)
+
+View(amaprods)
+
 ```
