@@ -1,17 +1,11 @@
 ---
 title: "CS102_2nd_Act"
 output: html_document
-date: "2024-02-22"
+date: "2024-02-29"
 ---
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
-```
-
-```{r}
-
-#Source link = Ady
-
 ```
 
 ```{r}
@@ -705,6 +699,7 @@ amaprods <- rbind(amaprods,
                 prod49,
                 prod50)
 
-View(amaprods)
+#View(amaprods)
+
 
 ```
