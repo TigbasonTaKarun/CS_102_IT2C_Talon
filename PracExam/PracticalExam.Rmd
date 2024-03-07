@@ -1,0 +1,72 @@
+---
+title: "CS 102 (Data Preparation)"
+author: "Cedric"
+date: "2024-03-06"
+output:
+  pdf_document: default
+  html_document: default
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r}
+data("warpbreaks")
+
+#View(warpbreaks)
+```
+
+How many observations does it have?
+54
+```{r}
+nrow(warpbreaks)
+
+```
+
+```{r}
+str(warpbreaks)
+```
+
+```{r}
+#warpbreaks$wool <- as.integer(warpbreaks)
+```
+
+```{r}
+sapply(warpbreaks, function(x) {paste(class(x), collapse=",")})
+```
+
+
+
+
+B.
+
+1.Read the complete file using readLines.
+```{r}
+sample <- readLines("exampleFile.txt")
+sample
+```
+
+2.Separate the vector of lines into a vector containing comments and a vector
+containing the data. Hint: use grepl.
+```{r}
+file_content <- readLines("exampleFile.txt")
+comment <- file_content[grepl("^//", file_content)]
+data_lines <- file_content[grepl("^//", file_content)]
+```
+
+3.Extract the date from the first comment line and display on the screen “It was created
+data.”
+```{r}
+date_lines <- comment[1]
+dat <- gsub("^// Created on ","", date_lines)
+#cat("created on", date, "\n")
+```
+
+4.
+```{r}
+#spli_data way na time na
+
+```
+
+
