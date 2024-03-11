@@ -1,0 +1,111 @@
+---
+title: "CS102_3rd_Act"
+author: "Cedric"
+date: "2024-03-08"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+
+```{r}
+library(dplyr)
+library(rvest)
+library(polite)
+library(httr)
+
+#sn = scrape nodes
+#rev = reviews
+
+reviews <- data.frame()
+
+link <- "https://www.imdb.com/title/tt1663662/reviews?ref_=tt_urv"
+session <- bow(link, user_agent = "For Educational Purpose")
+
+sn <- function(selector) {
+  scrape(session) %>%
+    html_nodes(selector) %>%
+    html_text(trim = TRUE)
+}
+
+movtitle <- sn("a.subnav_heading")
+reviewer <- sn("span.display-name-link")[1:10]
+sDate <- sn("span.review-date")[1:10]
+sRating <- sn("span.rating-other-user-rating")[1:10]
+sRev <- sn("div.text.show-more__control")[1:10]
+sTitleRev <- sn("a.title")[1:10]
+
+reviews <- rbind(reviews, data.frame(
+  movie_title = rep(movtitle, 10),
+  reviewer_name = reviewer,
+  review_date = sDate,
+  review_rating = sRating,
+  review_content = sRev,
+  review_title = sTitleRev
+))
+
+reviews
+```
+
+```{r}
+
+
+library(dplyr,dbplyr)
+
+library(RMySQL)
+
+
+linking <- dbConnect(RMySQL::MySQL(),
+                    dsn = "MariaDB-connection",
+                    Server = "localhost",
+                    dbname = "movies", 
+                    user = "root", 
+                    password = "")
+```
+
+```{r}
+dbListTables(linking)
+dbListFields(linking,"reviews")
+```
+
+```{r}
+
+revdata <- dbGetQuery(linking, "SELECT * FROM movies.reviews")
+
+glimpse(revdata)
+
+```
+
+```{r}
+
+
+
+for (i in 1:nrow(reviews)) {
+  mov_que <- paste0("INSERT INTO reviews (movie_title, name, date, rating, content, title) 
+                VALUES ('", reviews$movie_title[i],"','", rev$reviewer_name[i], "','", rev$review_date[i],"','", rev$review_rating[i], "','",
+                gsub("'","''", rev$review_content[i]), "','", gsub("'","''", rev$review_title[i]), "')")
+
+  result <- dbSendQuery(linking,mov_que )
+
+  
+}
+
+```
+
+```{r}
+
+review_data <- dbGetQuery(linking, "SELECT * FROM movies.reviews")
+
+review_data[,c(2:7)]
+
+write.csv(review_data[,c(2:7)], "review_data.csv")
+
+```
+
+```{r}
+# Close the database connection
+dbDisconnect(connection)
+
+```
